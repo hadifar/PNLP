@@ -1,4 +1,6 @@
-# Copyright 2016 The PNLP Authors. All Rights Reserved.
+# -*- coding: utf-8 -*-
+
+# Copyright 2016 Amir Hadifar.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,4 +15,13 @@
 # limitations under the License.
 # ==============================================================================
 
-__author__ = 'Amir'
+import utility
+
+file_path = "/Users/mac/PycharmProjects/PNLP/wiki.fa.text"
+
+if __name__ == "__main__":
+    # test all of classes here
+
+    # genrate stop word and test
+    stop_word_list = utility.getStopWordList()
+
