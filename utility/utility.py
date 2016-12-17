@@ -58,7 +58,7 @@ def save_dictionary_key(saved_file_path, dictionary):
 
 
 # pass a text file and generate stop word list
-def generateStopWordFromCorpus(file_path, save_file=True, saved_file_path="result/stop_words_list.txt"):
+def generateStopWordFromCorpus(file_path, save_file=True, saved_file_path="data/stop_words_list.txt"):
     input = open(file_path, 'r')
     frequency = get_sorted_doc_frequency(input)
     input.close()
@@ -70,4 +70,4 @@ def generateStopWordFromCorpus(file_path, save_file=True, saved_file_path="resul
 
 
 def getStopWordList():
-    return set(open('result/stop_words_list.txt').read().split())
+    return set(open('data/stop_words_list.txt').read().split())
