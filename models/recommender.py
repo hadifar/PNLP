@@ -73,4 +73,4 @@ def get_pro_recommended(all_documents, doc_index, recommended_items):
         our_scikit_comparisons.append(
             (cosine_similarity(doc_0, sklearn_representation.toarray()[doc_index]), doc_index, count_0))
 
-    return our_scikit_comparisons.sort(key=lambda row: row[0:], reverse=True)[:recommended_items]
+    return sorted(our_scikit_comparisons, key=lambda a_entry: a_entry[0], reverse=True)[:recommended_items]
