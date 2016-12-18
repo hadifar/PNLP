@@ -14,30 +14,39 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 # ==============================================================================
+from collections import Counter
 import re
-import operator
 
 import nltk
 
 RE_USELESS = r'[^\w\d\s]+'  # remove useless characters
 
-# generate frequency of word in document
-def get_doc_frequency(document):
-    frequency = {}
-    for sentence in document:
-        tokens = nltk.word_tokenize(sentence)
-        for word in tokens:
-            if word in frequency:
-                frequency[word] += 1
-            else:
-                frequency[word] = 1
-    return frequency
+
+# # generate frequency of word in document
+# def get_doc_frequency(file_path):
+#     frequency = {}
+#     for sentence in document:
+#         tokens = nltk.word_tokenize(sentence)
+#         for word in tokens:
+#             if word in frequency:
+#                 frequency[word] += 1
+#             else:
+#                 frequency[word] = 1
+#     return frequency
+
+
+def get_most_commons_words(file_path, number_of_commons=10):
+    input = open(file_path, 'r')
+    text = input.read()
+    tokens = nltk.word_tokenize(text)
+    counter = Counter(tokens)
+    return counter.most_common(number_of_commons)
 
 
 # generate reversed sorted frequency of document
-def get_sorted_doc_frequency(document):
-    frequency = get_doc_frequency(document)
-    return reversed(sorted(frequency.items(), key=operator.itemgetter(1)))
+# def get_sorted_doc_frequency(document):
+#     frequency = get_doc_frequency(document)
+#     return reversed(sorted(frequency.items(), key=operator.itemgetter(1)))
 
 
 # save dictionary keys into file
@@ -49,26 +58,25 @@ def save_dictionary_key(saved_file_path, dictionary):
 
 
 # pass a text file and generate stop word list
-# def generateStopWordFromCorpus(file_path, save_file=True, saved_file_path="data/stop_words_list.txt"):
-#     input = open(file_path, 'r')
-#     frequency = get_sorted_doc_frequency(input)
-#     input.close()
-#
-#     if save_file:
-#         save_dictionary_key(saved_file_path, frequency)
-#
-#     return frequency
+def generate_stopping_from_corpus(file_path, save_file=True, saved_file_path="_result/stop_words_list.txt",
+                               number_of_stopping=10):
+    frequency = get_most_commons_words(file_path, number_of_stopping)
+
+    if save_file:
+        save_dictionary_key(saved_file_path, frequency)
+
+    return frequency
 
 
 def get_stop_word_list():
-    return set(open('data/stop_words_list.txt').read().split())
+    return set(open('_data/stop_words_list.txt').read().split())
 
 
-def remove_stopping(file_path):
+def remove_stop_words(file_path, file_result_path):
     stop_words = get_stop_word_list()
 
     input = open(file_path, 'r')
-    output = open('result/removed_stopping.txt', 'w')
+    output = open(file_result_path, 'w')
 
     for sentence in input:
         tokenized_sentence = nltk.word_tokenize(sentence)
@@ -82,10 +90,9 @@ def remove_stopping(file_path):
     return None
 
 
-def remove_punctuation(file_path):
-
+def remove_punctuation(file_path, file_result_path):
     input = open(file_path, 'r')
-    output = open('result/removed_punctuation.txt', 'w')
+    output = open(file_result_path, 'w')
 
     for sentence in input:
         sentence = re.sub(RE_USELESS, r'', sentence)

@@ -15,33 +15,32 @@
 # limitations under the License.
 # ==============================================================================
 
-from utility import utility
-from utility import tfidf
+from utility import general_utility
+from models import tfidf
 
 file_path = "/Users/mac/PycharmProjects/PNLP/wiki.txt"
-file_result_path = "/Users/mac/PycharmProjects/PNLP/result/"
+file_result_path = "/Users/mac/PycharmProjects/PNLP/_result/"
 
 if __name__ == "__main__":
-
     # Utility
     # ================================================================================================
     # get stop word hand-design
-    stop_word_list = utility.get_stop_word_list()
+    stop_word_list = general_utility.get_stop_word_list()
 
     # get 10 most common words from corpus
-    utility.get_most_commons_words(file_path, 10)
+    general_utility.get_most_commons_words(file_path, 10)
 
     # remove punctuation
     punctuation_result_path = file_result_path + "removed_punctuation.txt"
-    utility.remove_punctuation(file_path, punctuation_result_path)
+    general_utility.remove_punctuation(file_path, punctuation_result_path)
 
     # remove stop words from corpus
     stop_word_path = file_result_path + "removed_stopping.txt"
-    utility.remove_stop_words(file_path, stop_word_path)
+    general_utility.remove_stop_words(file_path, stop_word_path)
 
-
+    # Models
     # ================================================================================================
-
-
     # calculate tf-idf
-    tf_idf_vector = tfidf.get_tf_idf(file_path)
+    docs = []
+    tfidf_representation = tfidf.tfidf_naive(docs)
+    tfidf_scikit_representation = tfidf.tfidf_pro(docs)

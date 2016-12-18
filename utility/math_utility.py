@@ -14,3 +14,18 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 # ==============================================================================
+import math
+
+
+def cosine_similarity(vector1, vector2):
+    dot_product = sum(p * q for p, q in zip(vector1, vector2))
+    magnitude = math.sqrt(sum([val ** 2 for val in vector1])) * math.sqrt(sum([val ** 2 for val in vector2]))
+    if not magnitude:
+        return 0
+    return dot_product / magnitude
+
+
+def jaccard_similarity(query, document):
+    intersection = set(query).intersection(set(document))
+    union = set(query).union(set(document))
+    return len(intersection) / len(union)
