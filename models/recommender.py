@@ -48,12 +48,12 @@ def get_naive_recommended(all_documents, doc_index, recommended_items):
     :return:
     """
     tfidf_representation = tfidf.tfidf_naive(all_documents)
-    our_tfidf_comparisons = []
+    naive_comparisons = []
     for count_0, doc_0 in enumerate(tfidf_representation):
-        our_tfidf_comparisons.append((cosine_similarity(doc_0, tfidf_representation[doc_index]), doc_index, count_0))
+        naive_comparisons.append((cosine_similarity(doc_0, tfidf_representation[doc_index]), doc_index, count_0))
 
-    our_tfidf_comparisons = sorted(our_tfidf_comparisons, key=lambda a_entry: a_entry[0], reverse=True)
-    return our_tfidf_comparisons[:recommended_items]
+    naive_comparisons = sorted(naive_comparisons, key=lambda a_entry: a_entry[0], reverse=True)
+    return naive_comparisons[:recommended_items]
 
 
 def get_pro_recommended(all_documents, doc_index, recommended_items):
@@ -68,9 +68,9 @@ def get_pro_recommended(all_documents, doc_index, recommended_items):
                                     tokenizer=tokenize)
     sklearn_representation = sklearn_tfidf.fit_transform(all_documents)
 
-    our_scikit_comparisons = []
+    scikit_comparisons = []
     for count_0, doc_0 in enumerate(sklearn_representation.toarray()):
-        our_scikit_comparisons.append(
+        scikit_comparisons.append(
             (cosine_similarity(doc_0, sklearn_representation.toarray()[doc_index]), doc_index, count_0))
 
-    return sorted(our_scikit_comparisons, key=lambda a_entry: a_entry[0], reverse=True)[:recommended_items]
+    return sorted(scikit_comparisons, key=lambda a_entry: a_entry[0], reverse=True)[:recommended_items]
