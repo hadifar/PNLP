@@ -14,14 +14,3 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 # ==============================================================================
-
-import utility
-
-file_path = "/Users/mac/PycharmProjects/PNLP/wiki.fa.text"
-
-if __name__ == "__main__":
-    # test all of classes here
-
-    # genrate stop word and test
-    stop_word_list = utility.getStopWordList()
-
