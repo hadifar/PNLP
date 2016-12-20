@@ -16,7 +16,7 @@
 # ==============================================================================
 
 from utility import general_utility
-from models import tfidf
+from model import tfidf
 
 file_path = "/Users/mac/PycharmProjects/PNLP/wiki.txt"
 file_result_path = "/Users/mac/PycharmProjects/PNLP/_result/"
