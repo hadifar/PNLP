@@ -18,6 +18,12 @@ import math
 
 
 def cosine_similarity(vector1, vector2):
+    """
+    calculate cosine similarity between two vectors
+    :param vector1:
+    :param vector2:
+    :return: normalize value of cosine similarity
+    """
     dot_product = sum(p * q for p, q in zip(vector1, vector2))
     magnitude = math.sqrt(sum([val ** 2 for val in vector1])) * math.sqrt(sum([val ** 2 for val in vector2]))
     if not magnitude:
@@ -26,6 +32,12 @@ def cosine_similarity(vector1, vector2):
 
 
 def jaccard_similarity(query, document):
+    """
+    calculate Jaccard similarity between query and document
+    :param query:
+    :param document:
+    :return:
+    """
     intersection = set(query).intersection(set(document))
     union = set(query).union(set(document))
     return len(intersection) / len(union)

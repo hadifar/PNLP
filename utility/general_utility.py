@@ -57,9 +57,16 @@ def save_dictionary_key(saved_file_path, dictionary):
     output.close()
 
 
-# pass a text file and generate stop word list
 def generate_stopping_from_corpus(file_path, save_file=True, saved_file_path="_result/stop_words_list.txt",
-                               number_of_stopping=10):
+                                  number_of_stopping=10):
+    """
+    pass a text file and generate stop word list
+    :param file_path:
+    :param save_file:
+    :param saved_file_path:
+    :param number_of_stopping:
+    :return:
+    """
     frequency = get_most_commons_words(file_path, number_of_stopping)
 
     if save_file:
@@ -69,10 +76,20 @@ def generate_stopping_from_corpus(file_path, save_file=True, saved_file_path="_r
 
 
 def get_stop_word_list():
+    """
+    list of stop words in persian
+    :return:
+    """
     return set(open('_data/stop_words_list.txt').read().split())
 
 
 def remove_stop_words(file_path, file_result_path):
+    """
+    stop word removal function
+    :param file_path:
+    :param file_result_path:
+    :return:
+    """
     stop_words = get_stop_word_list()
 
     input = open(file_path, 'r')
@@ -90,8 +107,14 @@ def remove_stop_words(file_path, file_result_path):
     return None
 
 
-def remove_punctuation(file_path, file_result_path):
-    input = open(file_path, 'r')
+def remove_punctuation(input_document, file_result_path):
+    """
+    remove punctuation from input_document
+    :param input_document:
+    :param file_result_path: clean document path
+    :return: nothing!
+    """
+    input = open(input_document, 'r')
     output = open(file_result_path, 'w')
 
     for sentence in input:
