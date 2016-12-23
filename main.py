@@ -39,3 +39,4 @@ if __name__ == "__main__":
     recommended_items_2 = recommender.get_recommended_news(all_documents, user_rated_item, user_rated_score, 4, True)
     for x in recommended_items_2:
         print(x)
+

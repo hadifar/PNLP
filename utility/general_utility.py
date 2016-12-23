@@ -19,7 +19,12 @@ import re
 
 import nltk
 
-RE_USELESS = r'[^\w\d\s]+'  # remove useless characters
+RE_USELESS = r'[^\w]'  # remove useless characters
+RE_DIGIT = r"^\d+\s|\s\d+\s|\s\d+$"  # remove digits
+RE_SPACE = r'\s+'  # remove space
+RE_EMAILS = r'[\w\.-]+@[\w\.-]+'
+RE_URLS = r'http\S+'
+RE_WWW = r'www\S+'
 
 
 # # generate frequency of word in document
@@ -122,5 +127,17 @@ def remove_punctuation(input_document, file_result_path):
         output.write(sentence)
 
     input.close()
+    output.close()
+    return None
+
+
+def remove_english_character(document, save_file_path):
+    output = open(save_file_path, 'w')
+
+    for sentence in document:
+        sentence = ''.join([i for i in sentence if not i.isalpha()])
+        sentence = re.sub(RE_SPACE, r' ', sentence)
+        output.write(sentence + '\n')
+
     output.close()
     return None
