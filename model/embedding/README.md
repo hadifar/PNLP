@@ -13,9 +13,9 @@ As you can see in the following image, words like 'نماینده', 'مجلس', 
 Also Vectors of countries and their capitals show another awesome feature of vector representation.
 Other properties of vector representation (addition,subtraction) would be added later.
 
-![500 words with TSNE](https://raw.github.com/AmirHadifar/PNLP/blob/master/model/embedding/embedding1.png)
+![500 words with TSNE](https://raw.githubusercontent.com/AmirHadifar/PNLP/blob/master/model/embedding/embedding1.png)
 
-![Countries with Capitals](https://raw.github.com/AmirHadifar/PNLP/blob/master/model/embedding/embedding2.png)
+![Countries with Capitals](https://raw.githubusercontent.com/AmirHadifar/PNLP/blob/master/model/embedding/embedding2.png)
 
 Usage
 -------
