@@ -5,7 +5,7 @@
 
 Train word2Vec & Glove on Wikipedia (Farsi) with Tensorflow and Gensim.
 
-* word embedding
+* **word embedding**
   * Word2Vec
   * Glove
 
@@ -14,6 +14,7 @@ Also Vectors of country and their capitals show awesome feature of vector repres
 Other properties of vector representation (addition,subtraction) would be added later.
 
 ![500 words with TSNE](https://raw.github.com/AmirHadifar/PNLP/blob/master/model/embedding/embedding1.png)
+
 ![Countries with Capitals](https://raw.github.com/AmirHadifar/PNLP/blob/master/model/embedding/embedding2.png)
 
 Usage

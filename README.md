@@ -3,24 +3,24 @@
 
 **PNLP | Persian Natural Language Processing**
 
-This is an experimental project. I try to develop everything from scratch and used open source library.
+This is an experimental project and I try to develop everything for Persian (Farsi) from scratch or use open source libraries.
 
 Repository contains:
-* utility
+* **utility**
   * Clean documents (remove punctuation, non-persian characters)
   * Stop word removal
 
 
-* word embedding
+* **word embedding**
   * Word2Vec
   * Glove
 
 
-* Vector space models
+* **Vector space models**
   * TF-IDF
 
 
-* Language models
+* **Language models**
   * Bigram with smoothing
   * Translation
 
