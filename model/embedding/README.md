@@ -3,6 +3,27 @@
 
 **Word Embedding | Word2Vec | Glove | Persian Embedding**
 
+Word Embedding
+-------
+
+**History**
+  - 1990s Vector Space Models (*LSI & ...*)
+  - 2003 (Bengio) *neural language model with model's parameter*
+  - 2008 (Collbert & Weston) *natural language modeling*
+  - 2012 (Mikolov et.al) *Word2Vec*
+  - 2013 (Pennington et.al)  *Glove*
+
+
+**Word embedding Models**
+
+  - comming soon...
+
+
+
+
+Usage
+-------
+
 Train word2Vec & Glove on Wikipedia (Farsi) with Tensorflow and Gensim.
 
 * **word embedding**
@@ -17,9 +38,12 @@ Other properties of vector representation (addition,subtraction) would be added 
 
 ![Countries & Capitals](https://raw.githubusercontent.com/AmirHadifar/PNLP/master/model/embedding/embedding2.png)
 
-Usage
+
+
+References
 -------
-Comming soon..
+ * http://sebastianruder.com/word-embeddings-1/index.html
+
 
 
 [1]: https://lvdmaaten.github.io/tsne/
