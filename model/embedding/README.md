@@ -26,10 +26,6 @@ Usage
 
 Train word2Vec & Glove on Wikipedia (Farsi) with Tensorflow and Gensim.
 
-* **word embedding**
-  * Word2Vec
-  * Glove
-
 As you can see in the following image, words like 'نماینده', 'مجلس', 'دولت', 'جمهوری' are close together (in [TSNE][1] representation).
 Also Vectors of countries and their capitals show another awesome feature of vector representation.
 Other properties of vector representation (addition,subtraction) would be added later.

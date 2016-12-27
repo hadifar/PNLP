@@ -17,71 +17,69 @@
 
 from multipledispatch import dispatch
 import numpy as np
+from sklearn.metrics.pairwise import cosine_similarity
 
 from model import tfidf
-from utility.math_utility import cosine_similarity
 
 tokenize = lambda doc: doc.split(" ")
 
 
-@dispatch(list, int, int, bool)
-def get_recommended_news(all_documents, doc_index, num_rec_items=4, naive=True):
+@dispatch(list, int, int)
+def get_recommended_news(all_documents, doc_index, number_of_returning_items=4):
     """
     get top-k recommended news based on a document
     :param all_documents: all documents (our collection)
     :param doc_index: index of a document which we find recommended item based on that
-    :param num_rec_items: number of recommended items which return
+    :param number_of_returning_items: number of recommended items which return
     :param naive: use naive tf-idf algorithm or not?
     :return: list of recommended items
     """
 
     # calculate tf-idf
-    if naive:
-        tfidf_representation = tfidf.tfidf_naive(all_documents)
-    else:
-        tfidf_representation = tfidf.tfidf_pro(all_documents)
+    tfidf_representation = tfidf.tfidf_pro(all_documents)
 
-    return get_top_k_similar(tfidf_representation, tfidf_representation[doc_index], num_rec_items)
+    return get_top_k_similar1(tfidf_representation, doc_index, number_of_returning_items)
 
 
-@dispatch(list, list, list, int, bool)
-def get_recommended_news(all_documents, user_rated_items, user_rated_score, num_rec_items=4, naive=True):
+@dispatch(list, list, list, int, int)
+def get_recommended_news(all_documents, user_rated_items, user_rated_score, number_of_returning_items=4,
+                         average_rate_score=6,
+                         ):
     """
     :param all_documents: all documents (our collection)
     :param user_rated_items: index of items which user rate
     :param user_rated_score: score of items which user rate
-    :param num_rec_items: number of recommended items which return
+    :param number_of_returning_items: number of recommended items which return
     :param naive: use naive tf-idf algorithm or not?
     :return: list of recommended items
     """
     # calculate TF-IDF
-    if naive:
-        tfidf_representation = tfidf.tfidf_naive(all_documents)
-    else:
-        tfidf_representation = tfidf.tfidf_pro(all_documents)
+    tfidf_representation = tfidf.tfidf_pro(all_documents)
 
     # calculate user-profile vector
-    # average user score
-    average_rate_score = sum(user_rated_score) / len(user_rated_score)
-    user_profile_vector = np.zeros(len(tfidf_representation[0]))
+    user_profile_vector = np.zeros(tfidf_representation.shape[1])
     for i, item_number in enumerate(user_rated_items):
-        diff = average_rate_score - user_rated_score[i]
+        diff = user_rated_score[i] - average_rate_score
         user_profile_vector += diff * np.array(tfidf_representation[item_number])
 
-    return get_top_k_similar(tfidf_representation, user_profile_vector, num_rec_items)
+    return get_top_k_similar2(tfidf_representation, user_profile_vector, number_of_returning_items)
 
 
-def get_top_k_similar(tfidf_representation, single_vector, num_rec_items=4):
-    """
-    calculate similarity between tfidf_representation and single_vector and return top-k similar items
-    :param tfidf_representation: tf-idf matrix
-    :param single_vector: a vector that want to find most similar item to it
-    :param num_rec_items: number of recommended items which return
-    :return: most similar items
-    """
+def get_top_k_similar1(tfidf_representation, doc_index, number_of_returning_items=4):
     comparisons = []
-    for count_0, doc_0 in enumerate(tfidf_representation):
-        comparisons.append((cosine_similarity(doc_0, single_vector), count_0, 999))
+    for count_0 in range(tfidf_representation.shape[0]):
+        comparisons.append(
+            (cosine_similarity(tfidf_representation[count_0], tfidf_representation[doc_index]), count_0))
 
     comparisons = sorted(comparisons, key=lambda a_entry: a_entry[0], reverse=True)
-    return comparisons[:num_rec_items]
+    return comparisons[1:number_of_returning_items + 1]
+
+
+def get_top_k_similar2(tfidf_representation, profile_vector, number_of_returning_items=4):
+    comparisons = []
+    for count_0 in range(tfidf_representation.shape[0]):
+        comparisons.append(
+            (cosine_similarity(tfidf_representation[count_0], profile_vector), count_0))
+
+    comparisons = sorted(comparisons, key=lambda a_entry: a_entry[0], reverse=True)
+    return comparisons[1:number_of_returning_items + 1]
