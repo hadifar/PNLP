@@ -50,7 +50,7 @@ def clean_all(document, doc_pattern=r'<TEXT>(.*?)</TEXT>'):
     document = re.findall(doc_pattern, document, re.DOTALL)
     for sentence in document:
         sentence = clean_sentence(sentence)
-        clean += ' ' + sentence
+        clean += ' \n' + sentence
     return clean
 
 

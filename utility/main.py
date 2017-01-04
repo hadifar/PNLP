@@ -84,3 +84,10 @@ if __name__ == '__main__':
 
     # clean hamshari
     generate_text_example()
+
+    i = 0
+    with open(gen_file_result_path,'r') as input_file:
+        for sen in input_file:
+            print(sen + '\n')
+            if i > 5:
+                break
