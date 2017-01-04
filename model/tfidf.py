@@ -51,5 +51,5 @@ def tfidf_naive(documents):
 
 
 def tfidf_pro(documents):
-    sklearn_tfidf = TfidfVectorizer(min_df=0, use_idf=True, smooth_idf=False, sublinear_tf=True, )
+    sklearn_tfidf = TfidfVectorizer()
     return sklearn_tfidf.fit_transform(documents)

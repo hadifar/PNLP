@@ -31,7 +31,6 @@ def get_recommended_news(all_documents, doc_index, number_of_returning_items=4):
     :param all_documents: all documents (our collection)
     :param doc_index: index of a document which we find recommended item based on that
     :param number_of_returning_items: number of recommended items which return
-    :param naive: use naive tf-idf algorithm or not?
     :return: list of recommended items
     """
 
@@ -50,7 +49,6 @@ def get_recommended_news(all_documents, user_rated_items, user_rated_score, numb
     :param user_rated_items: index of items which user rate
     :param user_rated_score: score of items which user rate
     :param number_of_returning_items: number of recommended items which return
-    :param naive: use naive tf-idf algorithm or not?
     :return: list of recommended items
     """
     # calculate TF-IDF
