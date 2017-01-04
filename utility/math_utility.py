@@ -31,7 +31,6 @@ def cosine_similarity(vector1, vector2):
     return dot_product / magnitude
 
 
-
 def jaccard_similarity(query, document):
     """
     calculate Jaccard similarity between query and document

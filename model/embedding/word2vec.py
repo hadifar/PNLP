@@ -218,7 +218,8 @@ def plot_with_labels(low_dim_embs, labels, filename='tsne.png'):
     for i, label in enumerate(labels):
         x, y = low_dim_embs[i, :]
         plt.scatter(x, y)
-        plt.annotate(label.decode('utf-8'), xy=(x, y), xytext=(5, 2), textcoords='offset points', ha='right',va='bottom')
+        plt.annotate(label.decode('utf-8'), xy=(x, y), xytext=(5, 2), textcoords='offset points', ha='right',
+                     va='bottom')
 
     plt.show()
 

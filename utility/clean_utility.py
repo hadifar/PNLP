@@ -24,7 +24,7 @@ RE_URLS = r'http\S+'
 RE_WWW = r'www\S+'
 
 
-def clean_all(document, save_file_path):
+def clean_all_save(document, save_file_path):
     """
     this function generate raw persian text, it remove non-persian character
     and all numbers and symbols
@@ -34,21 +34,40 @@ def clean_all(document, save_file_path):
     """
     with open(save_file_path, 'w') as output:
         for sentence in document:
-            sentence = re.sub(r'[^\u0621-\u06ff]', ' ', sentence)
-            sentence = arToPersianChar(sentence)
-            sentence = arToPersianNumb(sentence)
-            sentence = faToEnglishNumb(sentence)
-            sentence = re.sub(r'[a-zA-Z]', ' ', sentence)
-            sentence = re.sub(r'[0-9]', ' ', sentence)
-            sentence = re.sub(RE_WWW, r' ', sentence)
-            sentence = re.sub(RE_URLS, r' ', sentence)
-            sentence = re.sub(RE_EMAILS, r' ', sentence)
-            sentence = re.sub(RE_USELESS, r' ', sentence)
-            sentence = re.sub(RE_DIGIT, r' ', sentence)
-            sentence = re.sub(RE_SPACE, r' ', sentence)
-
+            sentence = clean_sentence(sentence)
             output.write(sentence + '\n')
     return None
+
+
+def clean_all(document, doc_pattern=r'<TEXT>(.*?)</TEXT>'):
+    """
+    clean text like hamshahri, irBlogs, and other Treck format
+    :param document:
+    :param doc_pattern:
+    :return:
+    """
+    clean = ''
+    document = re.findall(doc_pattern, document, re.DOTALL)
+    for sentence in document:
+        sentence = clean_sentence(sentence)
+        clean += ' ' + sentence
+    return clean
+
+
+def clean_sentence(sentence):
+    sentence = re.sub(r'[^\u0621-\u06ff]', ' ', sentence)
+    sentence = arToPersianChar(sentence)
+    sentence = arToPersianNumb(sentence)
+    sentence = faToEnglishNumb(sentence)
+    sentence = re.sub(r'[a-zA-Z]', ' ', sentence)
+    sentence = re.sub(r'[0-9]', ' ', sentence)
+    sentence = re.sub(RE_WWW, r' ', sentence)
+    sentence = re.sub(RE_URLS, r' ', sentence)
+    sentence = re.sub(RE_EMAILS, r' ', sentence)
+    sentence = re.sub(RE_USELESS, r' ', sentence)
+    sentence = re.sub(RE_DIGIT, r' ', sentence)
+    sentence = re.sub(RE_SPACE, r' ', sentence)
+    return sentence
 
 
 def arToPersianNumb(number):

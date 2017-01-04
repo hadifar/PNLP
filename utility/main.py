@@ -14,10 +14,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 # ==============================================================================
+import logging
+import os
 from utility import clean_utility
 
-file_path = "/Users/mac/PycharmProjects/PNLP/_data/d_wiki.fa.text"
-file_result_path = "/Users/mac/PycharmProjects/PNLP/_data/clean_wiki.fa.text"
+clean_file_path = "/Users/mac/PycharmProjects/PNLP/_data/d_wiki.fa.text"
+clean_file_result_path = "/Users/mac/PycharmProjects/PNLP/_data/clean_wiki.fa.text"
+
+gen_file_result_path = "/Users/mac/PycharmProjects/PNLP/_data/d_hamshahri.fa.text"
+gen_file_path = "/Users/mac/PycharmProjects/PNLP/_data/Hamshahri"
 
 
 # # generate frequency of word in document
@@ -56,20 +61,26 @@ file_result_path = "/Users/mac/PycharmProjects/PNLP/_data/clean_wiki.fa.text"
 
 
 
-# def remove_english_character(document, save_file_path):
-#     output = open(save_file_path, 'w')
-#
-#     for sentence in document:
-#         sentence = ''.join([i for i in sentence if not i.isalpha()])
-#         sentence = re.sub(RE_SPACE, r' ', sentence)
-#         output.write(sentence + '\n')
-#
-#     output.close()
-#     return None
+
+def clean_example():
+    print('clean wikipedia...')
+    with open(clean_file_path, 'r') as input_file:
+        clean_utility.clean_all_save(input_file, clean_file_result_path)
+
+
+def generate_text_example():
+    with open(gen_file_result_path, 'w') as output:
+        for subdir, dirs, files in os.walk(gen_file_path):
+            for file in files:
+                if file.endswith(".xml"):
+                    document = open(os.path.join(subdir, file)).read()
+                    text = clean_utility.clean_all(document, r'<TEXT>(.*?)</TEXT>')
+                    output.write(text)
 
 
 if __name__ == '__main__':
-    # clean Wikipedia
-    print('clean wikipedia...')
-    with open(file_path, 'r') as input_file:
-        clean_utility.clean_all(input_file, file_result_path)
+    # clean WikiPedia
+    # clean_example()
+
+    # clean hamshari
+    generate_text_example()
