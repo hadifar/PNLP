@@ -8,10 +8,10 @@ Word Embedding
 
 **History**
   - 1990s Vector Space Models (*LSI & ...*)
-  - 2003 (Bengio) *neural language model with model's parameter*
+  - 2000, 2002, 2003 (Bengio et.al) *neural language model with model's parameter*
   - 2008 (Collbert & Weston) *natural language modeling*
-  - 2012 (Mikolov et.al) *Word2Vec*
-  - 2013 (Pennington et.al)  *Glove*
+  - 2013 (Mikolov et.al) *Word2Vec*
+  - 2014 (Pennington et.al)  *Glove*
 
 
 **Word embedding Models**
